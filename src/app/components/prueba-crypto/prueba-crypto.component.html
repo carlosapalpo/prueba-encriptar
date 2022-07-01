@@ -1,0 +1,24 @@
+<h1>Prueba de encriptación con crypto-js </h1>
+<div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">Texto sin encriptar</label>
+        <input type="text" style="margin: 5px;" [(ngModel)]="textNormal">
+        <button style="margin: 5px;" (click)="encriptar()">Encriptar</button>
+    </div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto encriptado</label>
+        <p style="margin: 5px;">{{textCrypted}}</p>
+    </div>
+</div>
+<h1>Prueba de desencriptación con crypto-js </h1>
+<div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto encriptado</label>
+        <input type="text" style="margin: 5px;" [(ngModel)]="textCrypted2">
+        <button style="margin: 5px;" (click)="desencriptar()">Desencriptar</button>
+    </div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto desencriptado</label>
+        <p style="margin: 5px;">{{textDecrypted}}</p>
+    </div>
+</div>

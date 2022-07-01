@@ -1,0 +1,24 @@
+<h1>Prueba de encriptación con Bcrypt </h1>
+<div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">Texto sin encriptar</label>
+        <input type="text" style="margin: 5px;" [(ngModel)]="textNormal">
+        <button style="margin: 5px;">Encriptar</button>
+    </div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto encriptado</label>
+        <p style="margin: 5px;">{{textEncrypted}}</p>
+    </div>
+</div>
+<h1>Prueba de desencriptación con Bcrypt </h1>
+<div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto encriptado</label>
+        <input type="text" style="margin: 5px;" [(ngModel)]="textEncrypted2">
+        <button style="margin: 5px;">Desencriptar</button>
+    </div>
+    <div style="padding: 5px">
+        <label for="" style="margin: 5px;">texto desencriptado</label>
+        <p style="margin: 5px;">{{textDecrypted}}</p>
+    </div>
+</div>
