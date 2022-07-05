@@ -29,7 +29,9 @@
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/jsencrypt/bin/jsencrypt.js"
+                        ]
                     },
                     "configurations": {
                         "production": {

@@ -1,4 +1,4 @@
-<h1>Prueba de encriptación con crypto-js </h1>
+<h1>Prueba de encriptación con crypto-js (FRONTEND) </h1>
 <div>
     <div style="padding: 5px">
         <label for="" style="margin: 5px;">Texto sin encriptar</label>
@@ -7,18 +7,30 @@
     </div>
     <div style="padding: 5px">
         <label for="" style="margin: 5px;">texto encriptado</label>
-        <p style="margin: 5px;">{{textCrypted}}</p>
+        <p style="margin: 5px;">
+            {{textCrypted}}
+        </p>
+        <h5>JSON ENVIAR AL BACKEND</h5>
+        <p>
+            {{jsonEnviar | json}}
+        </p>
     </div>
+
+    Tiempo de ejecucion: {{tiempoFinalEncrypt - tiempoInicialEncrypt}} ms
 </div>
-<h1>Prueba de desencriptación con crypto-js </h1>
+<h1>Prueba de desencriptación (BACKEND) </h1>
 <div>
     <div style="padding: 5px">
-        <label for="" style="margin: 5px;">texto encriptado</label>
-        <input type="text" style="margin: 5px;" [(ngModel)]="textCrypted2">
-        <button style="margin: 5px;" (click)="desencriptar()">Desencriptar</button>
+        <label for="" style="margin: 5px;">Json recibido</label>
+        <p>
+            {{jsonEnviar | json}}
+        </p>
+        <button style="margin: 5px;" (click)="desencriptarJson()">Desencriptar</button>
     </div>
     <div style="padding: 5px">
         <label for="" style="margin: 5px;">texto desencriptado</label>
         <p style="margin: 5px;">{{textDecrypted}}</p>
     </div>
+
+    Tiempo de ejecucion: {{ tiempoFinalDescrypt - tiempoInicialDescrypt }} ms
 </div>
