@@ -46,13 +46,28 @@ export class PruebaCryptoComponent implements OnInit {
     this.decryptor.setPrivateKey(this._PRIVATE_KEY);
   }
 
+  /**
+   * Funcion qu encripta un texto.
+   */
   encriptar() {
     this.tiempoInicialEncrypt = Date.now();
     if (this.textNormal && this.textNormal !== '') {
       const salt = this.genCharRandom(6);
       const clave = this.genCharRandom(12);
       const mensaje = salt + this.textNormal.trim();
-      this.textCrypted = this._AES.encrypt(mensaje, clave).toString();
+      const encriptador = this._AES.encrypt(mensaje, clave, {
+        iv: CryptoJS.enc.Hex.parse(salt),
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+      console.log("mensaje: ", mensaje);
+      console.log("clave: ",clave);
+      console.log("key: ", encriptador.key.toString());
+      console.log("iv: ",encriptador.iv.toString());
+      console.log("cipher: ",encriptador.ciphertext.toString());
+      console.log("Texto: ",encriptador.toString());
+      console.log("Salt: ",encriptador.salt.toString());
+      this.textCrypted = encriptador.toString();
       const _data = `${salt}.${clave}`;
       this.textCrypted2 = this.encryptor.encrypt(_data).toString();
       this.jsonEnviar = {
@@ -65,8 +80,18 @@ export class PruebaCryptoComponent implements OnInit {
     this.tiempoFinalEncrypt = Date.now();
   }
 
+  /**
+   * Funcion que desencripta un texto.
+   * @param encrypt texto encriptado.
+   * @param salt salt del texto.
+   * @param clave clave de desencriptación.
+   */
   private desencriptar(encrypt: string, salt: string, clave: string) {
-    this.textDecrypted = this._AES.decrypt(encrypt.trim(), clave).toString(CryptoJS.enc.Utf8);
+    this.textDecrypted = this._AES.decrypt(encrypt.trim(), clave, {
+      iv: CryptoJS.enc.Hex.parse(salt),
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    }).toString(CryptoJS.enc.Utf8);
     if (this.textDecrypted.includes(salt)) {
       this.textDecrypted = this.textDecrypted.replace(salt, '');
     } else {
@@ -74,6 +99,9 @@ export class PruebaCryptoComponent implements OnInit {
     }
   }
 
+  /**
+   * Toma la información del json y la desencripta.
+   */
   desencriptarJson() {
     this.tiempoInicialDescrypt = Date.now();
     let descrypt = this.decryptor.decrypt(this.jsonEnviar.data).toString();
